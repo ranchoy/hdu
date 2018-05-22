@@ -1,27 +1,26 @@
 #include<iostream>
 #include<cstring>
 #include<cstdio>
-#define N 100005
+#define MAX 100010
+
 using namespace std;
-
-char str[N];
-
-//next[i],表示第i+1个字符传串的最大相同前后缀最后一个字符下标
-void cal_next(char *str, int len, int *next)
+char str[MAX];
+int nexti[MAX];
+int len;
+//nexti[i],表示第i+1个字符传串的最大相同前后缀最后一个字符下标
+void get_next(char *str, int len, int *next)
 {
     int k = -1;
-    next[0] = -1;
-
-    for(int i=1; i<len; i++)
+    nexti[0] = -1;
+    for( int i=1; i<len; i++)
     {
-        if( k>-1 && str[i]!=str[k+1])
+        while( k>-1 && str[i]!=str[k+1])
         {
             k = next[k];
         }
-
         if(str[i]==str[k+1])
         {
-            k ++;
+            k++;
         }
         next[i] = k;
     }
@@ -29,24 +28,24 @@ void cal_next(char *str, int len, int *next)
 
 int main()
 {
-    int n,len;
-    int next[N];
-    int num,l;
-    scanf("%d",&n);
-    while(n--)
+    int cnt;
+    int cycle;
+    scanf("%d",&cnt);
+    while( cnt-- )
     {
+        num = 0;
         scanf("%s",str);
         len = strlen(str);
-        cal_next(str, len, next);
-        l = len - (next[len-1]+1);
-        num = l - len%l;
-        if(l!=len && len%l==0)
-        {
-            num = 0;
-        }
-        printf("%d\n",num);
+        get_next( str, len, nexti);
+        cycle = len - ( nexti[len-1] + 1 );
 
+        if(cycle!=len && len%cycle==0)
+        {
+            printf("0\n");//已经循环
+        }else
+        {
+            printf("%d\n",cycle-len%cycle);
+        }
     }
     return 0;
 }
-
