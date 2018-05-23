@@ -5,7 +5,7 @@
 #define MAX 1010
 using namespace std;
 
-int v[MAX],w[MAX];//W[]表示体积,v[]表示价值
+int v[MAX],w[MAX]; //W[]表示体积,v[]表示价值
 int dp[MAX];
 
 int main()
