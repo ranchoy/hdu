@@ -7,16 +7,16 @@
 using namespace std;
 
 int dp[MAX]={0};
-
+int val[] = {0,1,2,3};
 int main()
 {
 	int n;
 	dp[0] = 1;
 	for(int i=1; i<=3; i++)
 	{
-		for(int j=i; j<=MAX; j++)
+		for(int j=val[i]; j<=MAX; j++)
 		{
-			dp[j] += dp[j-i];
+			dp[j] += dp[ j-val[i] ];
 		}
 	}
 	while(~scanf("%d", &n))
