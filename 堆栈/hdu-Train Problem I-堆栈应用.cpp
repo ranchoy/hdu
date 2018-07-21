@@ -14,7 +14,7 @@ int main()
 	int n,k,idx;
 	while(~scanf("%d %s %s", &n, s1, s2))
 	{
-		memset(flag, 0, sizeof(0));
+		memset(flag, 0, sizeof(flag));
 		while(!stk.empty())
 		{
 			stk.pop();
