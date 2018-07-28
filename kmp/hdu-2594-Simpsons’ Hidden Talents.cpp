@@ -10,7 +10,6 @@ int nexti[2*MAX];
 void get_next( char *str, int len, int *next)
 {
     int k = next[0] = -1;
-
     for( int i=1; i<len; i++)
     {
         while( k>-1 && str[i]!=str[k+1])
@@ -36,11 +35,11 @@ int main()
         slen = len + plen;
 
         strcat( str, ptr);
-
+        
         get_next( str, slen, nexti);
 
         slen = slen - 1;//注意是下标
-        while( (slen>len || slen>plen) && (nexti[slen]>len || nexti[slen]>plen) )
+        while(slen>len-1 || slen>plen-1)
         {
             slen = nexti[slen];
         }
