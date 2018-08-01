@@ -45,3 +45,86 @@ int main()
 	} 
 	return 0;
 } 
+
+
+
+/*
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<algorithm>
+using namespace std;
+
+int arr[105][300];
+
+//h(n) = h(n-1)*(4n-2)/(n+1) 
+//这里输出要h(n)*2 
+void catelan()
+{
+	int len,yu,temp;
+	memset(arr, 0, sizeof(arr));
+	arr[1][0] = arr[1][1] = 1;
+	arr[2][0] = 1;
+	arr[2][1] = 2;
+	len = 1;
+	
+	for(int i=3; i<40; i++)
+	{
+		yu = 0;
+		for(int j=1; j<=len; j++)
+		{
+			temp = arr[i-1][j]*(4*i-2) + yu;
+			arr[i][j] = temp%10;
+			yu = temp/10;
+		}
+		
+		while(yu)
+		{
+			arr[i][++len] = yu%10;
+			yu = yu/10;
+		}
+		
+		for(int j=len; j>=1; j--)
+		{
+			temp = arr[i][j] + yu*10;
+			arr[i][j] = temp/(i+1);
+			yu = temp%(i+1);
+		}
+		
+		while(arr[i][len]==0)
+		{
+			len --;
+		}
+		arr[i][0] = len;
+	}
+}
+
+int main()
+{
+	int n,cases=1;
+	catelan();
+	while(~scanf("%d",&n) && n!=-1)
+	{
+		int temp,yu=0,len=arr[n][0];
+		for(int j=1; j<=len; j++)
+		{
+			temp = arr[n][j]*2 + yu;
+			arr[n][j] = temp%10;
+			yu = temp/10;
+		}
+		while(yu)
+		{
+			arr[n][++len] = yu%10;
+			yu = yu/10;
+		}
+		arr[n][0] = len;
+		
+		printf("%d %d ", cases++, n);
+		for(int i=arr[n][0]; i>=1; i--)
+		{
+			printf("%d",arr[n][i]);
+		}printf("\n");
+	}
+	return 0;
+} 
+*/
