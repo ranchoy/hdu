@@ -7,7 +7,7 @@
 using namespace std;
 
 int map[MAX][MAX];
-int vis[MAX],dist[MAX];//标记数组vis[],点i到图最短距离dis[i]
+int vis[MAX],dist[MAX];//标记数组vis[],点i到图最短距离dist[i]
  
 int prim(int n)
 {	
