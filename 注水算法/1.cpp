@@ -40,14 +40,12 @@ void solve(int start, int end)
 	
 	first = arr[first_idx];
 	second = arr[second_idx];
-	
 	//获取左侧墙的索引
 	int start_idx = min(first_idx, second_idx);
 	//获取右侧墙的索引
 	int end_idx = max(first_idx, second_idx);
 	//计算距离
     int dist = end_idx - start_idx;
-	
 	if(dist > 1)
 	{
 		res = res + (dist - 1) * second;
