@@ -55,7 +55,6 @@ void solve(int start, int end)
 			res -= arr[i];
 		}
 	}
-	
 	//开始递归处理左侧墙距离开始位置能放多少水
 	solve(start, start_idx);
 	//开始递归处理右侧墙距离结束位置能放多少水
@@ -82,7 +81,6 @@ int main()
 	}
 	return 0;	
 } 
-
 /**
 4
 9
