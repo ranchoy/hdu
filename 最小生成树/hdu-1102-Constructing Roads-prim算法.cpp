@@ -11,16 +11,16 @@ int vis[MAX],dist[MAX];//标记数组vis[],点i到图最短距离dist[i]
  
 int prim(int n)
 {	
-	int cnt = n;
+	int cnt=n,point,dist_min;
 	dist[1] = 0;
 	while(cnt--)//n循环 
 	{
-		int point,temp=INF;
+		dist_min = INF;
 		for(int i=1; i<=n; i++)
 		{
-			if(vis[i]==0 && temp>dist[i])
+			if(vis[i]==0 && dist_min>dist[i])
 			{
-				temp = dist[i];
+				dist_min = dist[i];
 				point = i;
 			}
 		}
