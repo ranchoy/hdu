@@ -56,7 +56,7 @@ void search(int low, int high, int k)
 		return;
 	}
 	int mid = (tree[k].low + tree[k].high) / 2;
-	if( low >= mid+1) 
+	if( low > mid) //注意：1~mid是2*k范围,mid+1~high是2*k+1范围 
 	{
 		search(low, high, 2*k+1);
 	}
