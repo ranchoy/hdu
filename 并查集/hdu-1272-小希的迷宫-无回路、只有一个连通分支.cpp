@@ -25,7 +25,7 @@ int find(int x)
 		pre[i] = r;
 		i = j;
 	}
-	return r;
+	return r;//返回根节点
 }
 
 void join(int x, int y)//合并
