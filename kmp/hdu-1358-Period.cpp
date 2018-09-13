@@ -47,8 +47,8 @@ int main()
 
         for( int i=0; i<len; i++)
         {
-            cycle = (i+1) - ( nexti[i]+1 );//循环节
-            if( (i+1)%cycle==0 && (i+1)!=cycle )//循环节要是其子串
+            cycle = (i+1) - (nexti[i]+1);//循环节
+            if((i+1)%cycle==0 && (i+1)!=cycle)//循环节要是其子串
             {
                 printf("%d %d\n", i+1, (i+1)/cycle);
             }
