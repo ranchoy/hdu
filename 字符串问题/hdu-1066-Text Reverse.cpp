@@ -11,7 +11,6 @@ int arr[MAX];
 
 int main()
 {
-	
 	int cnt,len,j; 
 	scanf("%d", &cnt);
 	getchar();
