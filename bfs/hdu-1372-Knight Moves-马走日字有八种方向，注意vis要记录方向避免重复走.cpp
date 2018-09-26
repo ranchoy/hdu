@@ -1,7 +1,6 @@
 /*
  * 注意这题其实就是象棋的马走日字，有八个方向，从起点到终点要走多少步，
  * 为了不走重复的路引入vis[x][y][dir]，除去重复走的方案
- * 
 */
 #include<iostream>
 #include<cstdio>
@@ -14,7 +13,7 @@ int sx,sy,ex,ey;
 int vis[10][10][10];
 int dir[8][2] = { {2,1}, {2,-1}, {1,-2}, {-1,-2}, {-2,-1}, {-2,1}, {-1,2}, {1,2} };
 
-struct node{
+struct node {
 	int x,y,step;
 };
 
