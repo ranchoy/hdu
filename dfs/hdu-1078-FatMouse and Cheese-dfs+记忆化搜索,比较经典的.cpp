@@ -33,14 +33,6 @@ int dfs(int x, int y)
 		}
 		dp[x][y] = mx + arr[x][y];
 	}
-	
-//	for(int i=0; i<n; i++)
-//	{
-//		for(int j=0; j<n; j++)
-//		{
-//			cout << dp[i][j] << " ";
-//		}cout << endl;
-//	}
 	return dp[x][y];
 }
 
