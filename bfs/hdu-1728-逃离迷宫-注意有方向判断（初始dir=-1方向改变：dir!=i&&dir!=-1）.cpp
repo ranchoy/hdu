@@ -60,6 +60,7 @@ void bfs(struct node s) {
 
 int main() {
 	int t;
+	struct node s;
 	scanf("%d", &t);
 	while(t--) {
 		scanf("%d %d", &m, &n);
@@ -77,7 +78,7 @@ int main() {
 		sy = sy - 1;
 		ex = ex - 1;
 		ey = ey - 1;
-		struct node s;
+		
 		s.x = sx;
 		s.y = sy;
 		s.dir = -1;
