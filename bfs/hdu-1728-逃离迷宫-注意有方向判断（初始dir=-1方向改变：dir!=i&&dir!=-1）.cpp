@@ -114,3 +114,117 @@ int main() {
 no
 yes
 */
+
+/*
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<queue>
+#include<algorithm>
+#define MAX 105
+using namespace std;
+
+int n,m,k,flag;
+int sx,sy,ex,ey;
+char map[MAX][MAX],turn[MAX][MAX];
+int dir[4][2] = { {-1,0}, {1,0}, {0,-1}, {0,1} };
+
+struct node{
+    int x,y,turn,dir;
+
+    bool operator < (const node &a) const {
+        return turn > a.turn;
+    }
+};
+
+void bfs(struct node s)
+{
+    struct node cur,next;
+
+    priority_queue<struct node> pq;
+    pq.push(s);
+
+    while(!pq.empty())
+    {
+        cur = pq.top();
+        pq.pop();
+
+        if(cur.turn<=k && cur.x==ex && cur.y==ey)
+        {
+            flag = 1;
+            return;
+        }
+
+        if(cur.turn > k)
+        {
+            continue;
+        }
+
+        for(int i=0; i<4; i++)
+        {
+            next.x = cur.x + dir[i][0];
+            next.y = cur.y + dir[i][1];
+
+            if(next.x>=1 && cur.x<=n && cur.y>=1 && cur.y<=m && map[next.x][next.y]!='*')
+            {
+                if(cur.dir!=-1 && cur.dir!=i)
+                {
+                    next.turn = cur.turn + 1;
+                }
+                else
+                {
+                    next.turn = cur.turn;
+                }
+
+                next.dir = i;
+                if(next.turn <= k && next.turn<=turn[next.x][next.y])
+                {
+                    turn[next.x][next.y] = next.turn;
+                    pq.push(next);
+                }
+            }
+        }
+    }
+}
+
+
+int main()
+{
+    int cnt;
+    struct node s;
+
+    cin >> cnt;
+    while(cnt--)
+    {
+        // 初始化
+        flag = 0;
+        memset(turn, 0x3f, sizeof(turn));
+        cin >> n >> m;
+        for(int i=1; i<=n; i++)
+        {
+            for(int j=1; j<=m; j++)
+            {
+                scanf(" %c", &map[i][j]);
+            }
+        }
+
+        cin >> k >> sy >> sx >> ey >> ex;
+
+        s.x = sx;
+        s.y = sy;
+        s.dir = -1;
+        s.turn = 0;
+
+        bfs(s);
+        if(flag)
+        {
+            printf("yes\n");
+        }
+        else
+        {
+            printf("no\n");
+        }
+    }
+    return 0;
+}
+*/
