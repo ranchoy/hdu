@@ -87,7 +87,7 @@ int main()
 {
 	int res;
 	struct node s;
-	while(cin>>m>>n)
+	while(~scanf("%d %d", &m, &n))
 	{
 		// 初始化
 		memset(step_min, 0x3f, sizeof(step_min)); 
@@ -96,7 +96,7 @@ int main()
 		{
 			for(int j=0; j<n; j++)
 			{
-				cin>>map[i][j];
+				scanf(" %c", &map[i][j]);
 				if(map[i][j] == 'S')
 				{
 					sx = i;
