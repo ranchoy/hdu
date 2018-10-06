@@ -58,7 +58,7 @@ int main()
 		
 		for(int i=1; i<=n; i++)//根节点个数就表示连通分支个数
 		{
-			if(i==find(i))
+			if(pre[i] == i)
 			{
 				res ++;
 			}
