@@ -20,7 +20,7 @@ void prim(int n)
 	int cnt=n,point;
 	double dist_min,res=0;
 	dist[0] = 0;
-	// n条边 
+	// n-1条边 
 	while(cnt--)
 	{
 		dist_min = INF;

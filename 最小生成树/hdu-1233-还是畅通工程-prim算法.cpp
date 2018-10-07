@@ -11,12 +11,13 @@ int dist[MAX],vis[MAX];
 
 int prim(int n)
 {
-	int point,res=0;
+	int cnt=n-1,point,res=0;
 	dist[1] = 0;
-	for(int cnt=0; cnt<n; cnt++)
+	// n-1条边
+	while(cnt--)
 	{
 		int temp=INF;
-		for(int i=1; i<=n; i++)//找V集合中到最小生成树最近的点 
+		for(int i=1; i<=n; i++)// 找V集合中到最小生成树最近的点 
 		{
 			if(vis[i]==0 && temp>dist[i])
 			{
@@ -25,7 +26,7 @@ int prim(int n)
 			}
 		}
 		
-		vis[point] = 1;//把point加入S集合 
+		vis[point] = 1;// 把point加入S集合 
 		
 		for(int i=1; i<=n; i++)
 		{
@@ -49,7 +50,7 @@ int main()
 	int a,b,c;
 	while(~scanf("%d", &n) && n)
 	{
-		//初始化
+		// 初始化
 		memset(vis, 0, sizeof(vis));
 		memset(map, 0x7f, sizeof(map));
 		memset(dist, 0x7f, sizeof(dist));
@@ -58,7 +59,6 @@ int main()
 		{
 			scanf("%d %d %d", &a, &b, &c);
 			map[a][b] = map[b][a] = c;
-		//	map[a][a] = map[b][b] = 0;
 		}	
 		
 		res = prim(n);
