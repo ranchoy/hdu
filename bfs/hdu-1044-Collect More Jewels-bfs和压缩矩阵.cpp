@@ -1,3 +1,6 @@
+// 这题要注意怎么表示珠宝的状态vis[x][y][w],w表示已经得到珠宝的二进制
+// 还有要注意输入是先列再行,'@'和'<'不是珠宝,要明确珠宝范围
+// 最后要注意有时间限制,next.step<=t,在出口且时间为t也是可以的
 #include<iostream>
 #include<cstdio>
 #include<cstring>
@@ -62,7 +65,7 @@ void bfs(struct node s)
 					next.w = next.w|(1<<temp);
 				}
 
-				if(vis[next.x][next.y][next.w] == 0) 
+				if(vis[next.x][next.y][next.w]==0 && next.step<=t)// 时间t刚好到终点也是满足的 
 				{
 					vis[next.x][next.y][next.w] = 1;				
 					if(next.x==e.x && next.y==e.y)
