@@ -6,11 +6,12 @@
 #define INF 0x7f7f7f7f
 using namespace std;
 
-int vis[MAX],dist[MAX]; 
+int n,m;//点数n,边数m
 int map[MAX][MAX];
+int vis[MAX],dist[MAX]; 
 
 // Dijkstra算法是求源点s到其他点的最小距离 
-void Dijkstra(int n, int s)// n个点,源点s
+void Dijkstra(int s)// n个点,源点s
 {
 	vis[s] = 1;
 	dist[s] = 0;
@@ -34,9 +35,9 @@ void Dijkstra(int n, int s)// n个点,源点s
 		// 更新dist
 		for(int i=1; i<=n; i++)
 		{
-			if(map[s][i] != INF)
+			if(map[s][i]!=INF && dist[i]>dist[s]+map[s][i])
 			{
-				dist[i] = min(dist[i], dist[s]+map[s][i]);// Dijkstra算法目标所在	
+				dist[i] = dist[s] + map[s][i];	
 			}	
 		} 
 	} 
@@ -44,7 +45,6 @@ void Dijkstra(int n, int s)// n个点,源点s
 
 int main()
 {
-	int n,m;//点数n,边数m
 	int u,v,w; 
 	while(~scanf("%d %d", &n, &m)) 
 	{
@@ -52,13 +52,14 @@ int main()
 		memset(vis, 0, sizeof(vis));
 		memset(dist, 0x7f, sizeof(dist));
 		memset(map, 0x7f, sizeof(map));
-		 
+
 		while(m--)
 		{
 			cin >> u >> v >> w;
 			map[u][v] = map[v][u] = w;
 		}
-		Dijkstra(n, 1);
+
+		Dijkstra(1);
 		for(int i=1; i<=n; i++)
 		{
 			printf("%d ", dist[i]);
