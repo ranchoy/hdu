@@ -18,6 +18,7 @@ void spfa(int s)
 	int cur;
 	queue<int> q;
 	q.push(s);
+	
 	vis[s] = 1;
 	dist[s] = 0;
 	p_times[s] ++;
@@ -27,11 +28,12 @@ void spfa(int s)
 		cur = q.front();
 		q.pop();
 		vis[cur] = 0;// 出队列释放标记 
+
 		for(int i=1; i<=n; i++)
 		{
-			if(map[s][i]!=INF && dist[i]>dist[s]+map[s][i])
+			if(map[cur][i]!=INF && dist[i]>dist[cur]+map[cur][i])
 			{
-				dist[i] = dist[s] + map[s][i];
+				dist[i] = dist[cur] + map[cur][i];
 				if(vis[i] == 0)// 点i不在队列中 
 				{
 					vis[i] = 1;
