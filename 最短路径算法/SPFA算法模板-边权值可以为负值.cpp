@@ -1,12 +1,13 @@
 #include<iostream>
 #include<cstdio>
 #include<cstring>
+#include<queue>
 #include<algorithm>
 #define MAX 105
 #define INF 0x7f7f7f7f
 using namespace std;
 
-int p_times[MAX];// 点i入队列次数,用于判断负权图,p_times[i]<n,因为只要n-1次就能求出所有单源最短路径 
+int p_times[MAX];// 点i入队列次数,用于判断负权图,p_times[i]<=n,因为只要n-1次就能求出所有单源最短路径 
 int map[MAX][MAX],vis[MAX],dist[MAX];
 
 // spfa求单源最短路径,边的权值可以为负数
