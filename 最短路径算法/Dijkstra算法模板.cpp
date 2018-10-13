@@ -10,7 +10,7 @@ int n,m;//点数n,边数m
 int map[MAX][MAX];
 int vis[MAX],dist[MAX]; 
 
-// Dijkstra算法是求源点s到其他点的最小距离 
+// Dijkstra算法是求单源最短路径,边权值不能为负数,因为(dist[s]+负数)可能小于dist[i](这个i是vis[i]已经确定最小了)
 void Dijkstra(int s)// n个点,源点s
 {
 	vis[s] = 1;
