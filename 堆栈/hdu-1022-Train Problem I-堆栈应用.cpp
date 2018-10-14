@@ -56,3 +56,19 @@ int main()
 	}
 	return 0;
 }
+
+/*
+3 123 321
+3 123 312
+
+Yes.
+in
+in
+in
+out
+out
+out
+FINISH
+No.
+FINISH
+*/ 
