@@ -70,4 +70,16 @@ int main()
     return 0;
 }
 
+/*
+3
+BAPC
+BAPC
+AZA
+AZAZAZA
+VERDI
+AVERDXIVYERDIAN
 
+1
+3
+0
+*/
