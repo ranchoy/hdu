@@ -3,7 +3,6 @@
 #include<cstring>
 #include<algorithm>
 #define N 200000
-#define M 5000
 #define INF 0x7ffffff
 using namespace std;
 
@@ -56,7 +55,7 @@ void search(int low, int high, int k)
 		return;
 	}
 	int mid = (tree[k].low + tree[k].high) / 2;
-	if( low > mid) //注意：1~mid是2*k范围,mid+1~high是2*k+1范围 
+	if(low > mid) //注意：1~mid是2*k范围,mid+1~high是2*k+1范围 
 	{
 		search(low, high, 2*k+1);
 	}
@@ -105,3 +104,19 @@ int main()
 	}
 	return 0;
 }
+
+/*
+5 6
+1 2 3 4 5
+Q 1 5
+U 3 6
+Q 3 4
+Q 4 5
+U 2 9
+Q 1 5
+
+5
+6
+5
+9
+*/
