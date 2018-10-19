@@ -50,7 +50,6 @@ void kmp( char *str, int len, char *ptr, int plen, int *next)
         }
     }
     printf("no\n");
-    return;
 }
 
 
