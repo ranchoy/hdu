@@ -12,7 +12,7 @@ using namespace std;
 
 int arr[MAX],res=0;
 
-void solve(int start, int end)
+void pool(int start, int end)
 {
 	int first=0,second=0;
 	int first_idx=0,second_idx=0;
@@ -37,9 +37,7 @@ void solve(int start, int end)
 			second_idx = i;
 		}
 	}
-	
-	first = arr[first_idx];
-	second = arr[second_idx];
+
 	//获取左侧墙的索引
 	int start_idx = min(first_idx, second_idx);
 	//获取右侧墙的索引
@@ -56,9 +54,9 @@ void solve(int start, int end)
 		}
 	}
 	//开始递归处理左侧墙距离开始位置能放多少水
-	solve(start, start_idx);
+	pool(start, start_idx);
 	//开始递归处理右侧墙距离结束位置能放多少水
-	solve(end_idx, end);
+	pool(end_idx, end);
 }
 
 int main()
@@ -76,7 +74,7 @@ int main()
 			scanf("%d", &arr[i]);
 		}
 
-		solve(0, n-1);
+		pool(0, n-1);
 		printf("%d\n", res);
 	}
 	return 0;	
