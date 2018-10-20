@@ -15,7 +15,7 @@ void cal_next(char *str,int len, int *next)
     next[0] = -1;
     for(int i=1; i<len; i++)
     {
-        if( k>-1 && str[i]!=str[k+1])
+        if(k>-1 && str[i]!=str[k+1])
         {
             k = next[k];
         }
@@ -34,7 +34,7 @@ int kmp(char str[],char ptr[], int next[])
 
     for(int i=0; i<slen; i++)
     {
-        if( k>-1 && str[i]!=ptr[k+1])
+        if(k>-1 && str[i]!=ptr[k+1])
         {
             k = next[k];
         }
@@ -55,7 +55,7 @@ int kmp(char str[],char ptr[], int next[])
 int main()
 {
     int res,next[N];
-    while(scanf("%s %s",str,ptr)!=EOF)
+    while(~scanf("%s %s",str,ptr))
     {
         if(str[0]=='#') return 0;
         slen = strlen(str);

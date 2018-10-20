@@ -2,7 +2,6 @@
 #include<cstdio>
 #define N 1000005
 #define M 10005
-
 using namespace std;
 
 int a[N];
@@ -14,11 +13,11 @@ void cal_next(int *m, int len, int *next)
     next[0] = -1;
     for(int i=1; i<len; i++)
     {
-        while( k>-1 && m[i]!=m[k+1] )
+        while(k>-1 && m[i]!=m[k+1])
         {
             k = next[k];
         }
-        if( m[i]==m[k+1] )
+        if(m[i] == m[k+1])
         {
             k++;
         }
@@ -29,19 +28,19 @@ void cal_next(int *m, int len, int *next)
 int kmp(int *a, int alen, int *b, int blen, int *next)
 {
     int k = -1;
-    cal_next( b, blen, next);
-    for( int i=0; i<alen; i++)
+    cal_next(b, blen, next);
+    for(int i=0; i<alen; i++)
     {
-        while( k>-1 && a[i]!=b[k+1])
+        while(k>-1 && a[i]!=b[k+1])
         {
             k = next[k];
         }
 
-        if(a[i]==b[k+1])
+        if(a[i] == b[k+1])
         {
             k++;
         }
-        if( k== blen-1)
+        if(k == blen-1)
         {
             return i-k+1;//下标加1
         }
@@ -53,7 +52,7 @@ int main()
 {
     int cnt,m,n,res;
     int next[M];
-    scanf("%d",&cnt);
+    scanf("%d", &cnt);
     while(cnt--)
     {
         scanf("%d %d", &n, &m);
@@ -65,7 +64,7 @@ int main()
         {
             scanf("%d", &b[i]);
         }
-        res = kmp( a, n, b, m, next);
+        res = kmp(a, n, b, m, next);
         printf("%d\n",res);
     }
     return 0;
