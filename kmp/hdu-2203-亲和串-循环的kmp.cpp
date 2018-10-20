@@ -69,3 +69,13 @@ int main()
         }
     }
 }
+
+/*
+AABCD
+CDAA
+ASD
+ASDF
+
+yes
+no
+*/
