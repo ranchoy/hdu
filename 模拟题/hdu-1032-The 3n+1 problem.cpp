@@ -14,7 +14,12 @@ int main()
 	
 		if(a > b)
 		{
+			printf("%d %d ", a, b);
 			swap(a, b);
+		}
+		else
+		{
+			printf("%d %d ", a, b);
 		}
 		for(int i=a; i<=b; i++)
 		{
@@ -34,7 +39,7 @@ int main()
 			}
 			mx = max(mx, cnt);
 		}
-		printf("%d %d %d\n", a, b, mx);
+		printf("\%d\n", mx);
 	} 
 	return 0;
 }
