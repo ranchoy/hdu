@@ -11,6 +11,7 @@ struct node {
 struct point {
 	double x,y;
 };
+
 // 叉乘判断两条线段是否相交 
 bool is_jiao(struct node u, struct node v)
 {
@@ -33,6 +34,7 @@ bool is_jiao(struct node u, struct node v)
 	}
 	return false;
 }
+
 int main()
 {
 	int n,res;
