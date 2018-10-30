@@ -37,6 +37,7 @@ void spfa(int s)
 				if(vis[i] == 0)// 点i不在队列中 
 				{
 					vis[i] = 1;
+					p_times[i] ++;
 					q.push(i);
 					
 					if(p_times[i] > n)
