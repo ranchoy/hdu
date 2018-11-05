@@ -30,6 +30,7 @@ void Dijkstra(int n, int s)
 				s = i;// 更改源点s到下一个点i 
 			}
 		}
+		vis[s] = 1;
 		// 更新dist 
 		for(int i=1; i<=n; i++)
 		{
