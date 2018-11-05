@@ -61,9 +61,9 @@ int main()
 						if(dist(center, p[k]) <= 1.0001)
 						{
 							temp ++;
-						}
-						res = max(res, temp);
+						}	
 					}
+                    res = max(res, temp);
 				}
 			}
 		}
