@@ -3,30 +3,32 @@
 #include<cstdio>
 #include<cstring>
 #include<algorithm>
-#define MAX 1005 
+#define MAX 1005
+#define INF 0x7fffffff
 using namespace std;
+
+int n;
+int arr[MAX],dp[MAX];
 
 int main()
 {
-	int n,mx;
-	int arr[MAX],dp[MAX];
-	while(~scanf("%d", &n) && n)
+	int mx;
+	while(~scanf("%d", &n) && n!=0)
 	{
 		// 初始化
-		mx = 0;
-		memset(dp, 0, sizeof(dp));
-		 
+		mx = -INF; 
+		
 		for(int i=0; i<n; i++)
 		{
 			scanf("%d", &arr[i]);
 		}
-		dp[0] = arr[0];
+		
 		for(int i=1; i<n; i++)
 		{
-			dp[i] = arr[i];
+			dp[i] = arr[i];// 注意赋值 
 			for(int j=0; j<i; j++)
 			{
-				if(dp[j] < dp[i])
+				if(arr[j] < arr[i])
 				{
 					dp[i] = max(dp[i], dp[j]+arr[i]);
 				}
@@ -35,8 +37,8 @@ int main()
 		}
 		cout << mx << endl;
 	}
-	return 0;	
-} 
+	return 0;
+}
 
 /*
 3 1 3 2
