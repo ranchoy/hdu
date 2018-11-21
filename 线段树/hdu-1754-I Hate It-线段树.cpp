@@ -28,14 +28,13 @@ void build(int left, int right, int k)
 // 线段树更新,update(下标idx,值val,节点k) 
 void update(int idx, int val, int k)
 {
-	int mid;
 	if(tree[k].left==idx && tree[k].left==tree[k].right)
 	{
 		tree[k].val = val;
 		return;
 	}
 	
-	mid = (tree[k].left + tree[k].right) / 2;
+	int mid = (tree[k].left + tree[k].right) / 2;
 	
 	if(idx <= mid)
 	{
@@ -52,14 +51,13 @@ void update(int idx, int val, int k)
 // 线段树查找,search(左边界left,右边界right,节点k) 
 void search(int left, int right, int k)
 {
-	int mid;
 	if(tree[k].left==left && tree[k].right==right)
 	{
 		res = max(res, tree[k].val);
 		return;
 	}
 	
-	mid = (tree[k].left + tree[k].right) / 2;
+	int mid = (tree[k].left + tree[k].right) / 2;
 	
 	if(left > mid)
 	{
