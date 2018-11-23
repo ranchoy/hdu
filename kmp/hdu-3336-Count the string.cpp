@@ -36,7 +36,7 @@ int main()
         scanf("%d",&len);
         scanf("%s", str);
         memset(dp, 0, sizeof(dp));
-        cal_next( str, len, next);
+        cal_next(str, len, next);
         for(int i=1; i<=len; i++)
         {
             dp[i] = dp[ next[i-1] + 1 ] + 1;
