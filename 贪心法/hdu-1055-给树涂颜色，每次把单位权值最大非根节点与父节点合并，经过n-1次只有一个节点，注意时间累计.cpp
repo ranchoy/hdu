@@ -1,4 +1,4 @@
-// 题解： 每次找一个单位时间权值最大(cost/cur_time）非根节点，与父节点合并，经过(n-1)次合并后只有一个节点
+// 题解： 每次找一个单位时间权值最大(cost/cur_time）非根节点，与父节点合并，直到只有一个节点
 #include<iostream>
 #include<cstdio>
 #include<cstring>
@@ -39,7 +39,7 @@ int main()
             scanf("%d", &p[i].cost);
             p[i].time = 1;
             p[i].w = p[i].cost;
-            res += p[i].cost;
+            res += p[i].cost;// 先加一遍
         }
 
         for(int i=1; i<n; i++)
@@ -54,8 +54,8 @@ int main()
             p[v].w = 0;
             u = p[v].parent;// v的父节点u
             res += p[v].cost * p[u].time;
-            // 合并父和子节点，把m子节点的父亲指向p节点
-            for(int j=1; j<=n; j++)
+            
+            for(int j=1; j<=n; j++)// 把v节点的儿子节点的父亲指向u
             {
                 if(p[j].parent == v)
                 {
@@ -63,7 +63,7 @@ int main()
                 }
             }
 
-            p[u].cost += p[v].cost;
+            p[u].cost += p[v].cost;// 合并u节点和v节点
             p[u].time += p[v].time;
             p[u].w = 1.0 * p[u].cost / p[u].time;
         }
