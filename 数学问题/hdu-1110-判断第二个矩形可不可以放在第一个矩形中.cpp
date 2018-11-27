@@ -9,11 +9,11 @@ bool check(double a, double b, double x, double y)
 {
     if(a*b <= x*y) return false;
     if(a>x && b>y) return true;
-    if(a <= x) return false;
+    if(a <= x) return false;// 不能省略
 
     double dist_xy = sqrt(x*x + y*y);
-    double angle = asin(a / dist_xy) - asin(x / dist_xy);
-    double dist = y * cos(angle) + x * sin(angle);
+    double angle = asin(a / dist_xy) - asin(x / dist_xy);// y与b的夹角
+    double dist = y * cos(angle) + x * sin(angle);// (x,y)在b上的投影
 
     if(dist > b) return false;
     else return true;
