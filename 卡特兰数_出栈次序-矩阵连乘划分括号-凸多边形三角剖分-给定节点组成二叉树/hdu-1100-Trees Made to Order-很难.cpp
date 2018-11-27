@@ -8,6 +8,7 @@ using namespace std;
 
 LL cate[MAX];
 
+// h(n) = h(n-1) * (4*n-2) / (n+1); 
 void get_catelan()
 {
     cate[0] = 1;
