@@ -9,7 +9,6 @@ bool ac,pe,wa;
 char a[MAX],b[MAX];
 string start,end,src,submit; 
 
-
 void read(string &s)
 {
 	s.clear();
