@@ -1,53 +1,52 @@
 #include<iostream>
 #include<cstdio>
 #include<cstring>
-#define N 1000005
-#define M 10005
-
+#include<algorithm>
+#define MAX 1000005
 using namespace std;
 
-char str[N],ptr[M];
-int slen,plen;
+int nt[MAX];
+char ptr[MAX],str[MAX];
 
-//求next函数
-void cal_next(char *str,int len, int *next)
+void get_next(char *str, int len, int *next)
 {
     int k = -1;
     next[0] = -1;
     for(int i=1; i<len; i++)
     {
-        if( k>-1 && str[i]!=str[k+1])
+        while(k>-1 && str[i]!=str[k+1])
         {
             k = next[k];
         }
-        if(str[i]==str[k+1])
+        if(str[i] == str[k+1])
         {
-            k++;
+            k ++;
         }
         next[i] = k;
     }
 }
 
-int kmp(char str[],char ptr[], int next[])
+int kmp(char *ptr, int plen, char *str, int slen, int *next)
 {
-    int k = -1;
-    int cnt = 0;//统计含多少个子串
+    int k=-1,cnt=0;
+    get_next(str, slen, next);
 
-    for(int i=0; i<slen; i++)
+    for(int i=0; i<plen; i++)
     {
-        if( k>-1 && str[i]!=ptr[k+1])
+        while(k>-1 && ptr[i]!=str[k+1])
         {
             k = next[k];
         }
 
-        if(str[i]==ptr[k+1])
+        if(ptr[i] == str[k+1])
         {
-            k++;
+            k ++;
         }
-        if(k==plen-1)
+
+        if(k == slen - 1)// 找到一个str加一
         {
             cnt ++;
-            k = next[k];//重新初始化
+            k = next[k];
         }
     }
     return cnt;
@@ -55,16 +54,15 @@ int kmp(char str[],char ptr[], int next[])
 
 int main()
 {
-    int n,res=0;
-    int next[M];
-    scanf("%d",&n);
+    int n,plen,slen,res;
+    scanf("%d", &n);
     while(n--)
     {
-        scanf("%s%s",ptr,str);
-        slen = strlen(str);
+        scanf("%s %s", str, ptr);
         plen = strlen(ptr);
-        cal_next(ptr,plen,next);
-        res = kmp(str, ptr, next);
+        slen = strlen(str);
+
+        res = kmp(ptr, plen, str, slen, nt);
         printf("%d\n", res);
     }
     return 0;
