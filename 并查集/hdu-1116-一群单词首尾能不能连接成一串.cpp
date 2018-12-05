@@ -112,7 +112,6 @@ int main()
         {
             printf("The door cannot be opened.\n");
         }
-        
     }
     return 0;
 }
