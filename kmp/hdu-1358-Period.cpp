@@ -14,19 +14,16 @@ void get_next(char *str, int len, int *next)
 {
     int k = -1;
     next[0] = -1;
-
     for(int i=1; i<len; i++)
     {
         while(k>-1 && str[i]!=str[k+1])
         {
             k = next[k];
         }
-
         if(str[i] == str[k+1])
         {
             k ++;
         }
-        
         next[i] = k;
     }
 }
