@@ -61,13 +61,6 @@ int main()
         idx ++;
     }
 
-    // for(int i=0; i<6; i++)
-    // {
-    //     scanf("%s", map[idx]);
-    //     insert(map[idx]);
-    //     idx ++;
-    // }
-    
     for(int i=0; i<idx; i++)
     {
         len = strlen(map[i]);
