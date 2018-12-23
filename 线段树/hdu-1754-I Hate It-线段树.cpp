@@ -5,109 +5,118 @@
 #define MAX 200000
 using namespace std;
 
-int n,m,res;
+int res;
 struct node {
-	int left,right,val;
-} tree[4*MAX + 5];
+    int l,r,w;
+} tree[4 * MAX + 5];
 
-// 线段树建立,build(左边界,右边界,节点k);
-void build(int left, int right, int k)
+// 建立
+void build(int l, int r, int k)
 {
-	tree[k].left = left;
-	tree[k].right = right;
-	tree[k].val = 0;
-	if(left == right)
-	{
-		return;
-	}
-	int mid = (left + right) / 2;
-	build(left, mid, 2*k);// 左孩子 
-	build(mid+1, right, 2*k+1);// 右孩子
+    int mid;
+
+    tree[k].l = l;
+    tree[k].r = r;
+    tree[k].w = 0;
+
+    if(tree[k].l == tree[k].r)
+    {
+        return ;
+    }
+
+    mid = (l + r) / 2;
+
+    build(l, mid, 2*k);
+    build(mid+1, r, 2*k+1);
 }
 
-// 线段树更新,update(下标idx,值val,节点k) 
+// 更新
 void update(int idx, int val, int k)
 {
-	if(tree[k].left==idx && tree[k].left==tree[k].right)
-	{
-		tree[k].val = val;
-		return;
-	}
-	
-	int mid = (tree[k].left + tree[k].right) / 2;
-	
-	if(idx <= mid)
-	{
-		update(idx, val, 2*k);
-	}
-	else
-	{
-		update(idx, val, 2*k+1);
-	}
-	
-	tree[k].val = max(tree[2*k].val, tree[2*k+1].val);// 最大值 
+    int mid;
+
+    if(tree[k].l == tree[k].r && tree[k].l == idx)
+    {
+        tree[k].w = val;
+        return ;
+    }
+
+    mid = (tree[k].l + tree[k].r) / 2;
+
+    if(idx <= mid)
+    {
+        update(idx, val, 2*k);
+    }
+    else 
+    {
+        update(idx, val, 2*k+1);
+    }
+
+    tree[k].w = max(tree[2*k].w, tree[2*k+1].w);
 }
 
-// 线段树查找,search(左边界left,右边界right,节点k) 
-void search(int left, int right, int k)
+// 查找
+void search(int l, int r, int k)
 {
-	if(tree[k].left==left && tree[k].right==right)
-	{
-		res = max(res, tree[k].val);
-		return;
-	}
-	
-	int mid = (tree[k].left + tree[k].right) / 2;
-	
-	if(left > mid)
-	{
-		search(left, right, 2*k+1);
-	}
-	else if(right <= mid)
-	{
-		search(left, right, 2*k);
-	}
-	else
-	{
-		search(left, mid, 2*k);
-		search(mid+1, right, 2*k+1);
-	}
-} 
+    int mid;
+
+    if(tree[k].l == l && tree[k].r == r)
+    {
+        res = max(res, tree[k].w);
+        return ;
+    }
+
+    mid = (tree[k].l + tree[k].r) / 2;
+    
+    if(mid >= r)
+    {
+        search(l, r, 2*k);
+    }
+    else if(mid < l)
+    {
+        search(l, r, 2*k+1);
+    }
+    else
+    {
+        search(l, mid, 2*k);
+        search(mid+1, r, 2*k+1);
+    }
+}
 
 int main()
 {
-	int a,b;
-	char ch;
-	while(~scanf("%d %d", &n, &m))
-	{
-		// 初始化 
-		getchar();
-		build(1, n, 1);
-		 
-		for(int i=1; i<=n; i++)
-		{
-			scanf("%d", &a);
-			update(i, a, 1);
-		}
-		
-		while(m--)
-		{
-			getchar();
-			scanf("%c %d %d", &ch, &a, &b);
-			if(ch == 'U')
-			{
-				update(a, b, 1);
-			}
-			else if(ch == 'Q')
-			{	
-				res = 0;
-				search(a, b, 1);
-				printf("%d\n", res);
-			} 
-		}
-	}
-	return 0;
-} 
+    char ch;
+    int n,m,a,b;
+
+    while(~scanf("%d %d", &n, &m))
+    {
+        // 初始化
+        build(1, n, 1);
+
+        for(int i = 1; i <= n; i++)
+        {
+            scanf("%d", &a);
+            update(i, a, 1);
+        }
+
+        while(m--)
+        {
+            scanf(" %c %d %d", &ch, &a, &b);
+
+            if(ch == 'Q')
+            {   
+                res = 0;
+                search(a, b, 1);
+                printf("%d\n", res);
+            }
+            else
+            {
+                update(a, b, 1);
+            }
+        }
+    }
+    return 0;
+}
 
 /*
 5 6
