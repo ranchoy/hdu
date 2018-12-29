@@ -1,4 +1,4 @@
-// 最长公共子序列，dp[i][j]表示a(0,i-1)和b(0,j-1)最长公共子序列的长度
+// 最长公共子序列，dp[i][j]： a(0,i)和b(0,j)最长公共子序列长度为dp[i][j]
 #include<iostream>
 #include<cstdio>
 #include<cstring>
@@ -9,12 +9,35 @@ using namespace std;
 int dp[MAX][MAX];
 char a[MAX],b[MAX];
 
+void print(int i, int j)
+{
+    if(i == 0 || j == 0)
+        return;
+
+    if(dp[i][j] == dp[i-1][j])
+    {
+        print(i-1, j);
+    }
+    else if(dp[i][j] == dp[i][j-1])
+    {
+        print(i, j-1);
+    }
+    else
+    {
+        print(i-1, j-1);
+        printf("%c", a[i-1]);
+    }
+}
+
 int main()
 {
     int n,m,t;
     scanf("%d", &t);
     while(t--)
     {
+        // 初始化
+        memset(dp, 0, sizeof(dp));
+
         scanf("%s %s", a, b);
 
         n = strlen(a);
@@ -37,14 +60,17 @@ int main()
                 }
             }
         }
-        printf("%d\n", dp[n][m]);
+
+        printf("%d ", dp[n][m]);
+        print(n, m);
+        printf("\n");
     }
     return 0;
 }
 
 /*
-1
-abcde abcd
+7
+abcdef bacfd
 
-4
+3 acd
 */
