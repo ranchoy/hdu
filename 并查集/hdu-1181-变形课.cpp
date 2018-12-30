@@ -1,67 +1,72 @@
-// 并查集算法
 #include<iostream>
 #include<cstdio>
 #include<cstring>
-#include<algorithm>
-#define MAX 1005
+#define MAX 105
 using namespace std;
 
-int pre[27];
-char str[MAX];
+int pre[30];
 
-// 查找|压缩
-int find(int x)
+int find(int u)
 {
-    int r = x;
+    int r,k,temp;
+
+    r = u;
     while(pre[r] != r)// 查找
     {
         r = pre[r];
     }
-    int k = x;
+
+    k = u;
     while(pre[k] != r)// 压缩
     {
-        k = pre[k];
+        temp = pre[k];
         pre[k] = r;
+        k = temp;
     }
     return r;
 }
 
-// 合并
-void join(int x, int y)
+void join(int u, int v)
 {
     int a,b;
-    a = find(x);
-    b = find(y);
+    a = find(u);
+    b = find(v);
     if(a != b)
     {
-        pre[a] = b;// 这里注意顺序
+        pre[a] = b;
     }
+}
+
+// 初始化
+void init()
+{
+    for(int i=0; i<30; i++)
+        pre[i] = i;  
 }
 
 int main()
 {
-    int len,a,b;
-    for(int i=1; i<=26; i++) pre[i] = i;// 初始化
+    int len, u, v;
+    char str[MAX];
+
+    init();
     while(~scanf("%s", str))
     {
         if(str[0] == '0')
         {
-            if(pre[2] == pre[13])// b...m
-            {
+            if(pre[2] == pre[13])
                 printf("Yes.\n");
-            }
             else
-            {
                 printf("No.\n");
-            }
-            for(int i=1; i<=26; i++) pre[i] = i;// 初始化
+
+            init();
         }
         else
         {
             len = strlen(str);
-            a = str[0] - 'a' + 1;
-            b = str[len-1] - 'a' + 1;
-            join(a, b);
+            u = str[0] - 'a' + 1;
+            v = str[len-1] - 'a' + 1;
+            join(u, v);
         }
     }
     return 0;
