@@ -11,7 +11,7 @@ void qsort(int left, int right)
 {
     if (left > right) return;
 
-    int num, l, r, mid;
+    int num, l, r;
     
     l = left;
     r = right;
