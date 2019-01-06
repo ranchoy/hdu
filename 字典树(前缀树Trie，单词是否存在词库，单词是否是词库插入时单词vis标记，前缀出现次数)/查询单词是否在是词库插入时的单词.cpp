@@ -24,7 +24,6 @@ void insert(char *str)
 		}
 		root = trie[root][j];// 继续往下找 
 	}
-	
 	vis[root] = true;// 标记词库中存在的单词 
 }
 
