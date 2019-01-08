@@ -1,25 +1,23 @@
 #include<iostream>
-#include<cstdio>
 #include<cstring>
-#define N 1005
-
+#define MAX 1010
 using namespace std;
 
-char str[N],ptr[N];
-int slen,plen;
+int len, plen;
+int _next[MAX];
+char str[MAX], ptr[MAX];
 
-//求next函数
-void cal_next(char *str,int len, int *next)
+void get_next(char *str, int len, int *next)
 {
-    int k = -1;
-    next[0] = -1;
+    int k;
+    k = next[0] = -1;
     for(int i=1; i<len; i++)
     {
-        if(k>-1 && str[i]!=str[k+1])
+        while(k>-1 && str[i]!=str[k+1])
         {
             k = next[k];
         }
-        if(str[i]==str[k+1])
+        if(str[i] == str[k+1])
         {
             k++;
         }
@@ -27,26 +25,24 @@ void cal_next(char *str,int len, int *next)
     }
 }
 
-int kmp(char str[],char ptr[], int next[])
+int kmp(char *str, char *ptr, int *next)
 {
-    int k = -1;
-    int cnt = 0;//统计含多少个子串
-
-    for(int i=0; i<slen; i++)
+    int k = -1, cnt = 0; 
+    get_next(ptr, plen, next);
+    for(int i=0; i<len; i++)
     {
-        if(k>-1 && str[i]!=ptr[k+1])
+        while(k > -1 && str[i] != ptr[k+1])
         {
             k = next[k];
         }
-
-        if(str[i]==ptr[k+1])
+        if(str[i] == ptr[k+1])
         {
             k++;
         }
-        if(k==plen-1)
+        if(k == plen - 1)
         {
-            cnt ++;
             k = -1;
+            cnt++;
         }
     }
     return cnt;
@@ -54,17 +50,15 @@ int kmp(char str[],char ptr[], int next[])
 
 int main()
 {
-    int res,next[N];
-    while(~scanf("%s %s",str,ptr))
+    int cnt;
+    while(~scanf("%s", str))
     {
-        if(str[0]=='#') return 0;
-        slen = strlen(str);
+        if(str[0] == '#')
+            return 0;
+        scanf("%s", ptr);
+        len = strlen(str);
         plen = strlen(ptr);
-        cal_next(ptr,plen,next);
-        res = kmp(str, ptr, next);
-        printf("%d\n", res);
+        cnt = kmp(str, ptr, _next);
+        printf("%d\n", cnt);
     }
-    return 0;
 }
-
-
