@@ -1,25 +1,22 @@
 // 题意：女生u愿意和男生v在一排，是单向的map[u][v] = 1；
 #include<iostream>
-#include<cstdio>
 #include<cstring>
-#include<algorithm>
-#define MAX 505
+#define MAX 1010
 using namespace std;
 
-int m,n;// m女生，n男生
-bool vis[MAX];
-int match[MAX];
+int m,n; //m女生,n男生
 int map[MAX][MAX];
+int vis[MAX],match[MAX];
 
 // 匈牙利算法：核心是让，女生没有男朋友或女生男朋友可以找其她女生
 bool dfs(int u)
 {
     for(int j=1; j<=n; j++)
     {
-        if(vis[j]==false && map[u][j]==1)// 未被访问&男女有好感
+        if(vis[j] == 0 && map[u][j] == 1) // 没有被访问&女生对男生有好感
         {
-            vis[j] = true;
-            if(match[j]==0 || dfs(match[j]))// 女生没有男朋友|女生男朋友可以找其他人
+            vis[j] = 1;
+            if(match[j]==0 || dfs(match[j])) // 女生没有男朋友|女生男朋友可以找其他人
             {
                 match[j] = u;
                 return true;
@@ -27,12 +24,12 @@ bool dfs(int u)
         }
     }
     return false;
-}   
+}
 
 int main()
 {
     int k,u,v,res;
-    while(~scanf("%d", &k) && k!=0)
+    while(~scanf("%d", &k) && k != 0)
     {
         // 初始化
         res = 0;
@@ -45,19 +42,17 @@ int main()
             scanf("%d %d", &u, &v);
             map[u][v] = 1;// 注意是单向的
         }
-
-        // 男生和女生匹配
-        for(int i=1; i<=m; i++)
+        
+        for(int i=1; i<=m; i++) // 女生去找男生
         {
-            memset(vis, false, sizeof(vis));
-            
+            memset(vis, 0, sizeof(vis));
             if(dfs(i))
             {
                 res ++;
             }
-        }   
+        }
 
-        cout << res << endl; 
+        printf("%d\n", res);
     }
     return 0;
 }
@@ -71,7 +66,6 @@ int main()
 2 3
 3 1
 0
-
 3
 0
 */
