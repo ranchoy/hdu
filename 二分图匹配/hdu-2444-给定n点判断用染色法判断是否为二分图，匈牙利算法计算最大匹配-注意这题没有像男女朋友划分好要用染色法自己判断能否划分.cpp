@@ -49,7 +49,7 @@ bool dfs(int x)
 {
 	for(int j=1; j<=n; j++)
 	{
-		if(map[x][j]==1 && vis[j]==0)// 有关系&&没有被访问过 
+		if(map[x][j]==1 && vis[j]==0)// 有关系&没有被访问过 
 		{
 			vis[j] = 1;
 			if(match[j]==0 || dfs(match[j]))// 没有男朋友||男朋友不要你了 
