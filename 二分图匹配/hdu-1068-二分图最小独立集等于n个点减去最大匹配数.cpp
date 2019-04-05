@@ -2,25 +2,24 @@
 // 这题就n个点，二分图划分是左边n个点，右边n个点
 // 求得的最大匹配数要除以2，因为边重复了 
 #include<iostream>
-#include<cstdio>
 #include<cstring>
-#include<algorithm>
-#define MAX 505
+#define MAX 1005
 using namespace std;
 
 int n;
+int vis[MAX];
 int match[MAX];
-int map[MAX][MAX], vis[MAX];
+int map[MAX][MAX];
 
 // 匈牙利算法
 bool dfs(int u)
 {
     for(int j=0; j<n; j++)
     {
-        if(vis[j]==0 && map[u][j]==1)
+        if(map[u][j] == 1 && vis[j] == 0) // 边(u,j)存在且点j未被标记
         {
             vis[j] = 1;
-            if(match[j]==0 || dfs(match[j]))
+            if(match[j] == 0 || dfs(match[j])) // 点j没有男朋友或者可以找其他人作为男朋友
             {
                 match[j] = u;
                 return true;
@@ -32,11 +31,12 @@ bool dfs(int u)
 
 int main()
 {
-    int m,u,v,res;
-    while(~scanf("%d", &n))
-    {   
+    int k,m,u,v,res;
+    while(~scanf("%d", &n) && n)
+    {
         // 初始化
         res = 0;
+        memset(vis, 0, sizeof(vis));
         memset(map, 0, sizeof(map));
         memset(match, 0, sizeof(match));
 
