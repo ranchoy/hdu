@@ -27,14 +27,14 @@ bool bfs()
 		
 		for(int j=1; j<=n; j++)
 		{
-			if(map[cur][j] == 1)// 边存在 
+			if(map[cur][j] == 1) // 边存在 
 			{
-				if(vis[j] == 0)// 未染色 
+				if(vis[j] == 0) // 未染色 
 				{
-					vis[j] = (vis[cur] == 1) ? 2 : 1;// 染异色 
+					vis[j] = (vis[cur] == 1) ? 2 : 1; // 染异色 
 					q.push(j);
 				}
-				else if(vis[cur] == vis[j])// 邻边同色 
+				else if(vis[cur] == vis[j]) // 邻边同色 
 				{
 					return false;
 				}
@@ -49,12 +49,12 @@ bool dfs(int x)
 {
 	for(int j=1; j<=n; j++)
 	{
-		if(map[x][j]==1 && vis[j]==0)// 有关系&没有被访问过 
+		if(map[x][j]==1 && vis[j]==0) // 有关系&没有被访问过 
 		{
 			vis[j] = 1;
-			if(match[j]==0 || dfs(match[j]))// 没有男朋友||男朋友不要你了 
+			if(match[j]==0 || dfs(match[j])) // 没有男朋友||男朋友不要你了 
 			{
-				match[j] = x;// 换男朋友 
+				match[j] = x; // 换男朋友 
 				return true;
 			}
 		}
