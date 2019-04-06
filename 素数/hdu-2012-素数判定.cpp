@@ -9,6 +9,7 @@ int is_prime[MAX];
 
 void init()
 {
+	is_prime[1] = 0;
 	is_prime[2] = 1;
 	for(int i=3; i<MAX; i++)
 	{
