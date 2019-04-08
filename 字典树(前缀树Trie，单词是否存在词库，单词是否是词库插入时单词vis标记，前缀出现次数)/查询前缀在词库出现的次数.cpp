@@ -19,7 +19,7 @@ void insert(char *str)
         {
             trie[root][j] = number++;
         }
-        root = trie[root][j]; // 继续往下找
+        root = trie[root][j]; // 继续往下
         arr[root]++; // 前缀后移一个位置保存，次数加1(放下面就是单个单词出现次数)
     }
 }

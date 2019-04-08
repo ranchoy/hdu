@@ -20,7 +20,7 @@ void insert(char *str)
         {
             trie[root][j] = number++;
         }
-        root = trie[root][j]; // 继续往下找
+        root = trie[root][j]; // 继续往下
     }
     vis[root] = 1; // 标记单词
 }
