@@ -33,7 +33,7 @@ int search(char *str)
         j = str[i] - 'a';
         if(trie[root][j] == 0) // 字符串断了
         {
-            return false;
+            return 0;
         }
         root = trie[root][j]; // 未断继续往下找
     }
