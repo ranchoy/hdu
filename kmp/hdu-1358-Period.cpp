@@ -1,14 +1,13 @@
-// 注意循环节求法， cycle = (i+1) - ( next[i]+1 );
+// 循环节： cycle = (i+1) - (next[i]+1)
 // 注意循环节特殊情况：len%cycle=0，可能aabaab这样，也可能是abcde这样
+// 题意：找到由两个及以上循环节构成的子串
 #include<iostream>
-#include<cstdio>
 #include<cstring>
-#include<algorithm>
-#define MAX 1000005
+#define N 1000005
 using namespace std;
 
-int nt[MAX];// next[]数组
-char str[MAX];
+int nt[N];
+char str[N];
 
 void get_next(char *str, int len, int *next)
 {
@@ -22,29 +21,30 @@ void get_next(char *str, int len, int *next)
         }
         if(str[i] == str[k+1])
         {
-            k ++;
+            k++;
         }
         next[i] = k;
     }
 }
 
+
 int main()
 {
-    int cse=1;
     int n,cycle;
-    while(~scanf("%d", &n) && n)
+    int _case = 0;
+    while(~scanf("%d", &n) && n!=0)
     {
         scanf("%s", str);
         get_next(str, n, nt);
+        printf("Test case #%d\n", _case++);
 
-        printf("Test case #%d\n", cse++);
-        for(int i=1; i<n; i++)
+        for(int i=0; i<n; i++)
         {
-            cycle = i - nt[i];// 循环节
+            cycle = (i+1) - (nt[i]+1);// 循环节
             if((i+1)%cycle==0 && (i+1)!=cycle)// 循环节要是当前(i+1)串的子串
             {
-                printf("%d %d\n", i+1, (i+1)/cycle);
-            }
+                printf("%d %d\n", (i+1), (i+1)/cycle);
+            }    
         }
         printf("\n");
     }
@@ -57,11 +57,9 @@ aaa
 12
 aabaabaabaab
 0
-
 Test case #1
 2 2
 3 3
-
 Test case #2
 2 2
 6 2
