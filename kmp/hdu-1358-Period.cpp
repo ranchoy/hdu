@@ -1,6 +1,6 @@
+// 题意：找到由两个及以上循环节构成的子串
 // 循环节： cycle = (i+1) - (next[i]+1)
 // 注意循环节特殊情况：len%cycle=0，可能aabaab这样，也可能是abcde这样
-// 题意：找到由两个及以上循环节构成的子串
 #include<iostream>
 #include<cstring>
 #define N 1000005
