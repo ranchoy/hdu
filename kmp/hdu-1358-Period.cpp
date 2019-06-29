@@ -27,7 +27,6 @@ void get_next(char *str, int len, int *next)
     }
 }
 
-
 int main()
 {
     int n,cycle;
