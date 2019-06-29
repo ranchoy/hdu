@@ -1,29 +1,25 @@
+// next[i]表示[0,i-1]前缀等于后缀的最长字符串数目
 #include<iostream>
-#include<cstdio>
 #include<cstring>
 #define N 100005
-
 using namespace std;
 
+int nt[N];
 char str[N];
-int nexti[N];
-int len;
 
-//求循环节
-void cal_next(char *str, int len, int *next)
+void get_next(char *str, int len, int *next)
 {
     int k = -1;
     next[0] = -1;
     for(int i=1; i<len; i++)
     {
-        while( k>-1 && str[i]!=str[k+1] )
+        while(k>-1 && str[i]!=str[k+1])
         {
             k = next[k];
         }
-
-        if( str[i]==str[k+1] )
+        if(str[i] == str[k+1])
         {
-            k ++;
+            k++;
         }
         next[i] = k;
     }
@@ -31,27 +27,36 @@ void cal_next(char *str, int len, int *next)
 
 int main()
 {
-    int cnt,res,circle;
-    scanf("%d",&cnt);
-    getchar();
+    int cnt,len,cycle;
+    scanf("%d", &cnt);
     while(cnt--)
     {
-        scanf("%s",str);
-
+        
+        scanf("%s", str);
         len = strlen(str);
+        get_next(str, len, nt);
 
-        cal_next(str, len, nexti);
+        cycle = len - (nt[len-1] + 1); // 循环节
 
-        circle = len - ( nexti[len-1] + 1 );//循环节
-
-        if(circle!=len && len%circle==0 )
+        if(len!=cycle && len%cycle==0)
         {
             printf("0\n");
         }
         else
         {
-            printf("%d\n",circle-len%circle);
-        }
+            printf("%d\n", len - len%cycle);
+        }       
     }
     return 0;
 }
+
+/*
+3
+aaa
+abca
+abcde
+
+0
+2
+5
+*/
