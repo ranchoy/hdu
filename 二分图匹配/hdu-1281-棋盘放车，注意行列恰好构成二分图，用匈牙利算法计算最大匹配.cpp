@@ -1,91 +1,92 @@
-// 棋盘放置车，同一行或者列只能放置一个棋子，例如(1,2)，(1,3)只能放一个棋子，相当于二分图求最大匹配用匈牙利算法即可
+// 题意：任意两个棋子不能在同一行或同一列，把行列看成二分图，相当于求二分图的最大匹配数
 // 题目还要求重要的点，枚举k个点，先map[a][b]=0如果匹配数少了就是重要的点，然后map[a][b]=1还原 
 #include<iostream>
-#include<cstdio>
 #include<cstring>
-#include<algorithm>
-#define MAX 101
+#define N 105
 using namespace std;
 
 int n,m,k;
-int vis[MAX],match[MAX];
-int map[MAX][MAX];// map[i][j]行i列j二分匹配 
+int vis[N];
+int match[N]; // 列j对应的行未match[j]
+int map[N][N];
 
-struct node {
-	int x,y;
-} p[MAX*MAX];
+struct node{
+    int x,y;
+} p[N*N];
 
 // 匈牙利算法
-bool dfs(int x) 
+bool dfs(int u)
 {
-	for(int j=0; j<=m; j++)
-	{
-		if(map[x][j]==1 && vis[j]==0)
-		{
-			vis[j] = 1;
-			if(match[j]==0 || dfs(match[j]))
-			{
-				match[j] = x;
-				return true;
-			}
-		}
-	}
-	return false;
+    for(int j=1; j<=m; j++)
+    {
+        if(vis[j]==0 && map[u][j]==1) // 列未匹配&有关联边
+        {
+            vis[j] = 1;
+            if(match[j]==0 || dfs(match[j])) // 没有行|行可以找其他列
+            {
+                match[j] = u;
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 int get_max_match()
 {
-	int res=0; 
-	memset(match, 0, sizeof(match));// 初始化 
-	for(int i=1; i<=n; i++)
-	{
-		memset(vis, 0, sizeof(vis));
-		if(dfs(i))
-		{
-			res ++;
-		}
-	}
-	return res;
+    int res = 0;
+    memset(match, 0, sizeof(match)); // 初始化 
+    for(int i=1; i<=n; i++)
+    {
+        memset(vis, 0, sizeof(vis));
+        if(dfs(i))
+        {
+            res++;
+        }
+    }
+    return res;
 }
 
 int main()
 {
-	int cnt = 1,temp;
-	int a,b,res,point;
-	while(~scanf("%d %d %d", &n, &m, &k))
-	{
-		// 初始化
-		res = point = 0;
-		memset(map, 0, sizeof(map));
-		
-		for(int i=0; i<k; i++)
-		{
-			scanf("%d %d", &a, &b);
-			map[a][b] = 1;
-			p[i].x = a;
-			p[i].y = b; 
-		}
-		
-		// 求最大匹配 
-		res = get_max_match();
+    int cnt = 1;
+    int u,v,res,point,temp;
+    while(~scanf("%d %d %d", &n, &m, &k))
+    {
+        // 初始化
+        point = 0;
+        memset(map, 0, sizeof(map));
 
-		// 不断去点，求不重要点
-		for(int i=0; i<k; i++)
-		{
-			a = p[i].x;
-			b = p[i].y;
-			map[a][b] = 0;
-			temp = get_max_match();
-			map[a][b] = 1;// 还原 
-			if(temp < res)	
-			{
-				point ++; // 重要的点 
-			}
-		} 	
-		printf("Board %d have %d important blanks for %d chessmen.\n", cnt++, point, res);
-	}
-	return 0;
-} 
+        for(int i=0; i<k; i++)
+        {
+            scanf("%d %d", &u, &v);
+            map[u][v] = 1;
+            p[i].x = u;
+            p[i].y = v;
+        }
+
+        // 最大匹配数
+        res = get_max_match();
+
+        // 不断去点，找重要点
+        for(int i=0; i<k; i++)
+        {
+            u = p[i].x;
+            v = p[i].y;
+            map[u][v] = 0; // 去点
+            temp = get_max_match();
+            map[u][v] = 1; // 还原
+            
+            if(temp < res)
+            {
+                point++;
+            }
+        }
+
+        printf("Board %d have %d important blanks for %d chessmen.\n", cnt++, point, res);
+    }
+    return 0;
+}
 
 /*
 3 3 4
